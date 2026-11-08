@@ -18,6 +18,9 @@ Propose one small exercise with its learning objective, acceptance condition,
 and division of work between me and you. Ask one prediction question and
 wait for my answer before writing application code or installing dependencies.
 
+Keep the warm-up to the reduced single-worker scope. Leave automatic crash
+recovery and competing-worker scenarios for formal study alongside messaging.
+
 Give hints progressively. If you demonstrate something, follow it with
 a different exercise that I own. Keep implementation progress separate
 from demonstrated understanding. End with a short checkpoint in the log.
@@ -38,6 +41,8 @@ Follow AGENTS.md. Read the latest learning-log entry and inspect the current
 implementation and git status. Summarize the observed state and select the
 next bounded exercise. If useful, start with one short transfer task for a
 recent concept. Do not advance multiple milestones. Ask one question and wait.
+During formal study, consult docs/EXAM_COVERAGE.md and use the Azure lab
+template for cloud experiments. Record evidence only when actually observed.
 ```
 
 ## Useful requests during a session

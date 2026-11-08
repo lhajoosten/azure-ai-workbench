@@ -18,11 +18,11 @@ Start with deterministic text extraction and metadata. There is no requirement f
 
 | Stage | Required outcome | Deferred |
 |---|---|---|
-| Before formal study | Local API, persistence, separate worker, observable job states, failure/retry exercise, repeatable local setup | Azure, paid AI calls, PDF/OCR, UI polish |
+| Before formal study | Local API, persistence, one separate worker, observable job states, one failure with manual recovery, repeatable local setup | Azure, paid AI calls, PDF/OCR, UI polish, automatic crash recovery, competing workers |
 | During study | Cloud deployment and focused exercises for each exam area | A production platform or exhaustive implementation of every Azure feature |
 | After study, optional | Small React inbox, richer extraction, deployment automation, stronger operational controls | Multi-tenancy, ERP integrations, real business documents |
 
-Suggested warm-up budget: 8–12 hours. This is a planning estimate, not a deadline. If worker recovery takes longer, carry it into formal study instead of having the agent complete it invisibly.
+Suggested warm-up budget: 8–12 hours for this reduced foundation. This is a planning estimate, not a deadline or a promise to complete the full reliability design. Carry remaining work into formal study instead of having the agent complete it invisibly. Advanced recovery belongs alongside S5's messaging work.
 
 ## Functional requirements
 
@@ -39,7 +39,8 @@ Suggested warm-up budget: 8–12 hours. This is a planning estimate, not a deadl
 - Use `pending`, `processing`, `succeeded`, and `failed` for job state. Track attempt number, timestamps, and a safe error summary. A document and its processing attempt have different identities.
 - Run processing in a separate process. The API must remain able to answer status requests while a job runs.
 - Define legal transitions and retry behavior with the learner before implementation. Retrying a failed job should preserve prior attempt history and reject conflicting retries.
-- A second worker must not corrupt or duplicate a published result. A crashed worker must not leave work stuck forever. Design and test the claiming, recovery, and stale-worker behavior during W2/W3.
+- During the warm-up, support one worker and one explicit failure/retry experiment. Reject retries of an active attempt. State clearly that automatic crash recovery and multiple workers are unsupported. Manual recovery of an interrupted attempt requires stopping its worker first and inspecting the state; do not reset a potentially active job automatically.
+- During formal-study reliability work, extend the design so competing or stale workers cannot corrupt a published result and interrupted work can recover safely. Design and test claiming, leases/recovery, and stale-worker behavior in the reliability exercise associated with S5. These are not warm-up acceptance conditions.
 - Temporary local simplifications must be recorded with their limits. Do not claim exactly-once execution or production readiness from an idempotent result alone.
 
 ### Retrieval, later
@@ -67,7 +68,7 @@ Specify response schemas, missing-resource behavior, and state conflicts in the 
 
 ## Architecture and approach
 
-Use one backend codebase with separately runnable API and worker entry points, one PostgreSQL instance, and Docker Compose locally. The warm-up may use a PostgreSQL-backed pending-job mechanism. Investigate atomic claims, short transactions, lease/recovery semantics, and safe result publication; these are learning tasks, not a supplied algorithm.
+Use one backend codebase with separately runnable API and worker entry points, one PostgreSQL instance, and Docker Compose locally. The warm-up may use a PostgreSQL-backed pending-job mechanism with one worker and short transactions. Investigate competing claims, lease/recovery semantics, and stale result publication during formal-study reliability work; these are learning tasks, not a supplied algorithm.
 
 During Azure study, introduce Service Bus in a bounded exercise. Explicitly examine the failure between committing a submission and publishing its message, duplicate deliveries, and acknowledgement timing. Choose a demonstrated consistency strategy before claiming reliable end-to-end delivery. An outbox is an option to evaluate, not boilerplate to generate on day one.
 
@@ -79,8 +80,8 @@ Three approaches were considered: disconnected service demos, one application us
 
 ## Quality and operational requirements
 
-- Dependency versions and commands become documented when introduced, with lockfiles. Add CI for actual checks once an executable slice exists.
-- Verify happy paths and the relevant failure path per exercise. Include real database tests for persistence and concurrency. Avoid tests that merely assert helper calls.
+- Dependency versions and commands become documented when introduced, with lockfiles. Run local checks during the warm-up; add CI for those checks during S1 rather than making pipeline work a prerequisite for formal study.
+- Verify happy paths and the relevant failure path per exercise. Use real database tests for persistence; add concurrency tests when formal study introduces competing workers. Avoid tests that merely assert helper calls.
 - Database state survives application restarts; schema changes use migrations. Separate disposable test databases from development data.
 - Add structured logs with request/job correlation early. During observability study, extend correlation across processes and services with OpenTelemetry.
 - Document timeouts, cancellation, retry limits, and shutdown behavior as those capabilities are introduced. No long database transaction around network or model calls.
@@ -89,6 +90,8 @@ Three approaches were considered: disconnected service demos, one application us
 
 ## Completion evidence
 
-The learner can submit and inspect a document, explain the transaction and worker lifetimes, reproduce a failure, recover safely, and show evidence for the outcome. Later milestones add deployment, retrieval, messaging, and observability demonstrations.
+For the warm-up, the learner can submit and inspect a document, explain the transaction and worker lifetimes, reproduce one processing failure, recover manually under the single-worker constraint, and show evidence for the outcome. Later milestones add deployment, retrieval, messaging, stronger recovery, and observability demonstrations.
 
 Each milestone has an implementation result and a separate learning assessment in the log. Do not substitute application completion for coverage of the official course and exam objectives.
+
+Use [EXAM_COVERAGE.md](EXAM_COVERAGE.md) to connect individual objectives to study resources and evidence. Use [AZURE_LAB_TEMPLATE.md](AZURE_LAB_TEMPLATE.md) for each cloud experiment, including cost and cleanup.

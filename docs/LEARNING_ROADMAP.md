@@ -6,7 +6,11 @@ Work through one exercise at a time. A milestone can take several sessions. The 
 
 Use `AGENTS.md` for the session loop and evidence rules. The prediction and variation prompts below are starting points, not an answer key. Adapt difficulty to demonstrated knowledge. Do not pre-generate solutions, future test suites, or cloud resources.
 
+Use [EXAM_COVERAGE.md](EXAM_COVERAGE.md) during formal study to track each published objective. Copy [AZURE_LAB_TEMPLATE.md](AZURE_LAB_TEMPLATE.md) for a cloud exercise, linking its evidence back to the coverage row and learning log.
+
 ## Warm-up before December
+
+Allow roughly 8–12 hours for the reduced local foundation, adjusting to actual progress. The exit is one document flowing through one worker, one observed failure, and manual recovery. Automatic crash recovery, competing workers, and extensive reliability testing are deferred to formal study. Do not turn this estimate into a deadline or silently automate unfinished lessons.
 
 ### W0 — Establish a minimal executable slice
 
@@ -38,25 +42,25 @@ Use `AGENTS.md` for the session loop and evidence rules. The prediction and vari
 
 **Predict:** what happens if the API restarts immediately after accepting the document?
 
-**Learner owns:** the state transitions, claim strategy, and placement of commits. Introduce short transactions and bounded database connections through observed behavior.
+**Learner owns:** the single-worker state transitions and placement of commits. Introduce short transactions and bounded database connections through observed behavior; leave competing claims to formal study.
 
-**Verify:** stop the worker, submit a document, confirm pending state, then start processing. Run two workers against the same pending job and inspect the committed result.
+**Verify:** stop the worker, submit a document, confirm pending state, then start the single worker and inspect the committed result. Confirm the API can report status during processing.
 
-**Transfer:** explain why an in-process background task does not provide the durability claimed by this workflow. Identify what remains unsolved about worker crashes; solve recovery in W3.
+**Transfer:** explain why an in-process background task does not provide the durability claimed by this workflow. Identify the unresolved crash and multiple-worker scenarios; do not implement automatic recovery in this exercise.
 
-### W3 — Recover from failure and reproduce the setup
+### W3 — Observe one failure and recover manually
 
-**Build:** recorded failed attempts, controlled retry, worker-crash recovery, protection against stale result publication, and a repeatable Docker Compose setup. Add CI for the checks now present.
+**Build:** a recorded processing failure, explicit retry with attempt history, and a repeatable Docker Compose setup for the API, database, and one worker. Reject retry of an active attempt. Document the single-worker limit and the manual procedure for interrupted work. CI can wait until S1.
 
-**Predict:** how could a restarted or delayed worker overwrite a newer attempt's successful result?
+**Predict:** after an extraction failure, which state and attempt history should a manual retry preserve?
 
-**Learner owns:** one recovery policy and a failure experiment. Failure injection must be local/test-only and explicit.
+**Learner owns:** one failure experiment, the retry transition, and an explanation of the current limits. Failure injection must be local/test-only and explicit.
 
-**Verify:** exercise a processing failure, conflicting retry, worker termination, lease/recovery behavior, and delayed stale completion using real PostgreSQL. Verify persistence across restarts. Avoid timing assertions based on arbitrary sleeps.
+**Verify:** deliberately fail a processing attempt, inspect the recorded error, correct its cause, retry manually, and inspect the result and preserved history. Confirm an active attempt cannot be retried and stored documents survive application restarts. Use real PostgreSQL. A crashed attempt may require manual inspection after its worker is stopped; automatic reclamation is deferred.
 
-**Transfer:** diagnose an unfamiliar failed attempt using logs and database state, then explain the recovery invariant without relying on the agent's explanation.
+**Transfer:** diagnose a different processing failure from logs and state, then explain when manual retry is safe and which failure cases remain unsupported.
 
-**Warm-up exit:** the learner can operate and explain the complete local processing flow. No embeddings, paid inference, or Azure resources are required.
+**Warm-up exit:** the learner can submit and persist a document, process it in one separate worker, inspect status/result, trigger one failure, recover manually, and explain request/transaction/worker lifetimes. No embeddings, paid inference, Azure resources, or production reliability claim are required.
 
 ## Formal study extensions
 
@@ -64,15 +68,25 @@ Use the official learning modules alongside these exercises. Readiness comes fro
 
 | Milestone | Application exercise | Evidence of understanding |
 |---|---|---|
-| S1 — Containers | Build/tag/publish images with ACR and ACR Tasks; deploy to App Service and Container Apps; explore revisions and KEDA; compare an AKS deployment in a temporary lab | Diagnose image-pull, startup, configuration, or connectivity failures; justify a hosting choice and show cleanup |
+| S1 — Containers | Build/tag/publish images with ACR and ACR Tasks; deploy to App Service and Container Apps; explore revisions and KEDA; compare an AKS deployment in a temporary lab; add CI for existing local checks | Diagnose image-pull, startup, configuration, or connectivity failures; justify a hosting choice and show cleanup |
 | S2 — PostgreSQL retrieval | Add pgvector chunk retrieval, metadata filters, index experiments, connection pooling, and resource/performance measurements | Explain a relevance failure, compare a measured query before/after a change, and distinguish index cost from retrieval quality |
 | S3 — Cosmos DB | Separate Python SDK lab for queries, vector retrieval, consistency, indexing/RU behavior, and change feed processing | Predict the effect of a query or indexing change, measure it, and explain one consistency tradeoff |
 | S4 — Managed Redis | Separate exercises for expiry/invalidation, vector indexing, and messaging; integrate a cache only when its purpose is clear | Reproduce stale data, repair invalidation, and explain the different delivery properties of pub/sub and Streams |
-| S5 — Messaging and serverless | Move a processing step to Service Bus; compare queues/topics and Event Grid routing/retries; build a Functions trigger/binding; explore a Durable Functions workflow | Reproduce duplicate delivery and a delivery failure, inspect the dead-letter path, and explain the database-to-message publication gap |
+| S5 — Messaging and serverless | Move a processing step to Service Bus; compare queues/topics and Event Grid routing/retries; build a Functions trigger/binding and configure/deploy its function app; explore a Durable Functions workflow | Reproduce duplicate delivery and a delivery failure, inspect the dead-letter path, explain the database-to-message publication gap, and diagnose a deployed function's configuration failure |
 | S6 — Security and configuration | Key Vault, App Configuration, scoped identities, configuration refresh/rotation, and protected application access | Reproduce and diagnose a denied operation; rotate a test secret or configuration and explain the identity and permission path |
 | S7 — Observability | Trace API, message, worker, database, and optional model calls; write KQL queries and inspect logs/metrics | Find a slow or failed processing step from evidence, identify missing trace propagation, and verify the correction |
 
 These are study exercises based on the [course](https://learn.microsoft.com/en-us/training/courses/ai-200t00) and [exam guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-200), checked on 2026-11-08. Some course exercises extend beyond the guide's explicitly listed bullets. The official guide is the source for exam scope; recheck it at the start of formal study.
+
+### Formal-study reliability exercise — alongside S5
+
+Revisit the warm-up's explicit limits when studying message processing. Investigate worker termination, lease expiry, duplicate delivery, acknowledgement timing, concurrent retries, and stale result publication. Compare a database-backed approach with Service Bus rather than automatically implementing both completely.
+
+**Learner owns:** a prediction about one failure window and a recovery or idempotency decision.
+
+**Verify:** reproduce that failure, inspect committed state and delivery history, implement a bounded correction, and vary the scenario. Use real PostgreSQL or the actual Azure service for the property being claimed. Avoid arbitrary sleeps and claims of exactly-once execution.
+
+This exercise supports engineering understanding. Completing a custom queue, a full outbox framework, or every concurrency scenario is not an exam prerequisite. Keep the experiment bounded and prioritize uncovered official objectives when study time is limited.
 
 ## Boundaries for comparison labs
 

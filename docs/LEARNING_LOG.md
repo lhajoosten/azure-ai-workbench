@@ -8,6 +8,8 @@
 - **Next exercise:** distinguish liveness from readiness, then create and verify the minimal API slice under the teaching contract.
 - **Blockers:** none recorded. Local development tools and credentials have not been checked.
 
+Planning revision, 2026-11-08: the warm-up now ends with a single-worker flow and one failure with manual recovery. Advanced crash/concurrency work moves alongside S5. This revision is not a completed learning session. Formal-study objectives are tracked in [EXAM_COVERAGE.md](EXAM_COVERAGE.md); cloud experiments use [AZURE_LAB_TEMPLATE.md](AZURE_LAB_TEMPLATE.md).
+
 ## Evidence rules
 
 Update the current checkpoint and append a short entry when a session ends. Preserve previous evidence; correct a mistaken entry visibly instead of rewriting history. Record commands only if actually run. Keep explanations attributed to the learner or agent; do not invent a learner response.

@@ -21,6 +21,8 @@ Start with UTF-8 text and Markdown. Add PDF extraction and semantic retrieval af
 3. Open a local coding agent and use [the first-session prompt](docs/START_HERE.md).
 4. Keep [the learning log](docs/LEARNING_LOG.md) updated so the next session resumes at the right point.
 
+Use [the exam-coverage checklist](docs/EXAM_COVERAGE.md) to track individual objectives during formal study. Copy [the Azure lab template](docs/AZURE_LAB_TEMPLATE.md) when introducing a cloud experiment.
+
 [AGENTS.md](AGENTS.md) defines the agent's teaching contract. It applies from the first session, including environment setup.
 
 ## Working agreement
@@ -36,6 +38,8 @@ Start with UTF-8 text and Markdown. Add PDF extraction and semantic retrieval af
 The project provides exercises for containers, vector-enabled data services, messaging, serverless execution, secrets, configuration, and observability. It supplements the official course; it is not a complete exam-preparation product or a guarantee of certification readiness.
 
 Azure alternatives belong in focused comparison labs. The main application does not need to run three databases or three hosting platforms simultaneously.
+
+The warm-up ends with a single-worker local flow and one observed failure with manual recovery. Advanced worker recovery and concurrency are formal-study exercises, not prerequisites for starting the course. Allow roughly 8–12 hours for the reduced foundation, adapting to actual progress.
 
 ## Official references
 

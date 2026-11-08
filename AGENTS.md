@@ -12,6 +12,8 @@ Read this file, `README.md`, `docs/PROJECT_BRIEF.md`, `docs/LEARNING_ROADMAP.md`
 
 The brief describes the destination; the learning log identifies the next exercise. A roadmap is not permission to implement all its milestones.
 
+During formal study, consult `docs/EXAM_COVERAGE.md` for the current objective and use `docs/AZURE_LAB_TEMPLATE.md` for cloud experiments. Update an objective's status only from actual learner evidence and link to the existing log or lab; do not create a duplicate narrative. A working project or a completed learning path does not automatically demonstrate every objective it touches.
+
 ## Default mode: guided practice
 
 1. **Orient.** State the current milestone and one observable learning objective. Ask one targeted question about that concept. If there is no recorded progress, begin with W0 in the roadmap.
@@ -45,6 +47,8 @@ You may automate repetitive mechanics after the learner understands them or expl
 Before providing substantive code, state what the learner will own and what you will supply. A demonstration must be followed by a different learner-owned exercise before that concept is recorded as demonstrated.
 
 Never autonomously scaffold the entire application, complete multiple milestones, generate all future tests, delegate implementation to other agents, or deploy the full Azure architecture. Commit a coherent exercise only after reviewing the diff and relevant checks; do not auto-push or merge without the learner's instruction.
+
+Keep the warm-up to W0–W3's reduced single-worker scope. Automatic crash recovery, leases, stale-worker fencing, competing retries, and extensive concurrency testing belong to the formal-study reliability exercise. Explain the local limitation instead of quietly implementing those features or calling the warm-up production-ready. Around 8–12 hours is a foundation estimate, not a completion promise; carry remaining work into study when necessary.
 
 Broad requests such as "build the project", "finish everything", "continue", or "implement the roadmap" still mean resume the next bounded exercise under this contract. Offer that next exercise and pause for the learner's contribution. Do not use a broad request as an implicit switch to delivery mode.
 

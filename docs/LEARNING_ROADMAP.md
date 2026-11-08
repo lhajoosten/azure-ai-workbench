@@ -8,6 +8,19 @@ Use `AGENTS.md` for the session loop and evidence rules. The prediction and vari
 
 Use [EXAM_COVERAGE.md](EXAM_COVERAGE.md) during formal study to track each published objective. Copy [AZURE_LAB_TEMPLATE.md](AZURE_LAB_TEMPLATE.md) for a cloud exercise, linking its evidence back to the coverage row and learning log.
 
+The [exercise catalogue](exercises/README.md) supplies the actual assignments. This roadmap describes sequencing; follow an assignment's tasks and observable completion conditions during the session.
+
+| Milestone | Concrete assignments |
+|---|---|
+| W0 | [W0-01: one observable API behavior](exercises/WARMUP.md#w0-01) |
+| W1 | [W1-01: persistence](exercises/WARMUP.md#w1-01), then [W1-02: validation and listing](exercises/WARMUP.md#w1-02) |
+| W2 | [W2-01: separate worker](exercises/WARMUP.md#w2-01) |
+| W3 | [W3-01: failed attempt/manual retry](exercises/WARMUP.md#w3-01), then [W3-02: reproducible containers](exercises/WARMUP.md#w3-02) |
+| S1 | [C01–C07](exercises/CONTAINERS.md) |
+| S2–S4 | [D01–D12](exercises/DATA_SERVICES.md), following the milestone order noted there |
+| S5 | [I01–I04](exercises/INTEGRATION.md) |
+| S6–S7 | [O01–O04](exercises/OPERATIONS.md) |
+
 ## Warm-up before December
 
 Allow roughly 8–12 hours for the reduced local foundation, adjusting to actual progress. The exit is one document flowing through one worker, one observed failure, and manual recovery. Automatic crash recovery, competing workers, and extensive reliability testing are deferred to formal study. Do not turn this estimate into a deadline or silently automate unfinished lessons.

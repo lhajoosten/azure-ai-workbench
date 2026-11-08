@@ -21,6 +21,8 @@ Start with UTF-8 text and Markdown. Add PDF extraction and semantic retrieval af
 3. Open a local coding agent and use [the first-session prompt](docs/START_HERE.md).
 4. Keep [the learning log](docs/LEARNING_LOG.md) updated so the next session resumes at the right point.
 
+The [exercise catalogue](docs/exercises/README.md) contains six local assignments and 27 Azure assignments, linked to the exam objectives. Begin with [W0-01](docs/exercises/WARMUP.md#w0-01); each brief defines the starting conditions, tasks, observable completion conditions, and transfer challenge without providing the solution.
+
 Use [the exam-coverage checklist](docs/EXAM_COVERAGE.md) to track individual objectives during formal study. Copy [the Azure lab template](docs/AZURE_LAB_TEMPLATE.md) when introducing a cloud experiment.
 
 [AGENTS.md](AGENTS.md) defines the agent's teaching contract. It applies from the first session, including environment setup.

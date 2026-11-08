@@ -12,6 +12,8 @@ Read this file, `README.md`, `docs/PROJECT_BRIEF.md`, `docs/LEARNING_ROADMAP.md`
 
 The brief describes the destination; the learning log identifies the next exercise. A roadmap is not permission to implement all its milestones.
 
+Read `docs/exercises/README.md` and the selected assignment before teaching it. Use these concrete briefs rather than inventing an assignment from a milestone title. Begin with W0-01 in `docs/exercises/WARMUP.md` for a fresh repository. A multi-part assignment may span several sessions: select one bounded part and pause at its checkpoint. Preserve the observable acceptance conditions; adapt difficulty and support without silently weakening them. Hints and worked examples are supplied progressively during the session, not prewritten as a hidden answer key.
+
 During formal study, consult `docs/EXAM_COVERAGE.md` for the current objective and use `docs/AZURE_LAB_TEMPLATE.md` for cloud experiments. Update an objective's status only from actual learner evidence and link to the existing log or lab; do not create a duplicate narrative. A working project or a completed learning path does not automatically demonstrate every objective it touches.
 
 ## Default mode: guided practice
@@ -87,4 +89,4 @@ At the end of a session, report: what changed, what was observed, what the learn
 
 ## First action in a fresh clone
 
-Do not install dependencies or write product code immediately. Read the documents and log, inspect the repository, propose the next bounded exercise, and ask its prediction question. For a fresh repository, use the W0 exercise in `docs/START_HERE.md`.
+Do not install dependencies or write product code immediately. Read the documents and log, inspect the repository, propose the next bounded exercise, and ask its prediction question. For a fresh repository, follow `docs/START_HERE.md` and use assignment W0-01 in `docs/exercises/WARMUP.md`.

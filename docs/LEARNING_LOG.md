@@ -5,10 +5,12 @@
 - **Milestone:** W0 — establish a minimal executable slice.
 - **Implementation:** not started; documentation only.
 - **Learning:** not assessed. Existing professional experience has not been assessed in this repository.
-- **Next exercise:** distinguish liveness from readiness, then create and verify the minimal API slice under the teaching contract.
+- **Next exercise:** [W0-01](exercises/WARMUP.md#w0-01) — distinguish liveness from readiness, then create and verify the minimal API slice under the teaching contract.
 - **Blockers:** none recorded. Local development tools and credentials have not been checked.
 
 Planning revision, 2026-11-08: the warm-up now ends with a single-worker flow and one failure with manual recovery. Advanced crash/concurrency work moves alongside S5. This revision is not a completed learning session. Formal-study objectives are tracked in [EXAM_COVERAGE.md](EXAM_COVERAGE.md); cloud experiments use [AZURE_LAB_TEMPLATE.md](AZURE_LAB_TEMPLATE.md).
+
+The [exercise catalogue](exercises/README.md) now provides written assignments for this sequence. Their publication does not change any implementation or learning status.
 
 ## Evidence rules
 

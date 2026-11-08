@@ -7,13 +7,16 @@ Paste this into your local coding agent after cloning the repository:
 ```text
 Read AGENTS.md, README.md, docs/PROJECT_BRIEF.md,
 docs/LEARNING_ROADMAP.md, and docs/LEARNING_LOG.md.
+Then read docs/exercises/README.md and the selected assignment.
 Inspect the repository and git status before changing anything.
 
 Act as my mentor and pairing partner. I want to learn by implementing
 and troubleshooting this application. Do not build the complete project,
 scaffold future milestones, or give me the answer before I attempt the exercise.
 
-Start at W0 unless recorded evidence shows it is already covered.
+Start with W0-01 in docs/exercises/WARMUP.md unless recorded evidence
+shows it is already covered. Use that written assignment rather than
+inventing a new one from the milestone title.
 Propose one small exercise with its learning objective, acceptance condition,
 and division of work between me and you. Ask one prediction question and
 wait for my answer before writing application code or installing dependencies.
@@ -28,7 +31,7 @@ from demonstrated understanding. End with a short checkpoint in the log.
 
 ## First exercise
 
-W0 starts with a minimal executable API slice. The first question is:
+The written assignment [W0-01](exercises/WARMUP.md#w0-01) starts with a minimal executable API slice. Its first question is:
 
 > If the application process is running but PostgreSQL cannot be reached, what should a liveness endpoint report, and how would you distinguish that from readiness?
 
@@ -41,6 +44,8 @@ Follow AGENTS.md. Read the latest learning-log entry and inspect the current
 implementation and git status. Summarize the observed state and select the
 next bounded exercise. If useful, start with one short transfer task for a
 recent concept. Do not advance multiple milestones. Ask one question and wait.
+Read the concrete assignment linked from docs/exercises/README.md before
+selecting its next small part; preserve its observable completion conditions.
 During formal study, consult docs/EXAM_COVERAGE.md and use the Azure lab
 template for cloud experiments. Record evidence only when actually observed.
 ```

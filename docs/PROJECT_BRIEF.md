@@ -95,3 +95,5 @@ For the warm-up, the learner can submit and inspect a document, explain the tran
 Each milestone has an implementation result and a separate learning assessment in the log. Do not substitute application completion for coverage of the official course and exam objectives.
 
 Use [EXAM_COVERAGE.md](EXAM_COVERAGE.md) to connect individual objectives to study resources and evidence. Use [AZURE_LAB_TEMPLATE.md](AZURE_LAB_TEMPLATE.md) for each cloud experiment, including cost and cleanup.
+
+Use the [exercise catalogue](exercises/README.md) for concrete assignments implementing this brief. Assignment completion must still satisfy the separate implementation and learning evidence rules.
